@@ -1,4 +1,143 @@
 {
   "pushCert": "certificate version 0.1\npusher 5383BCBFC0EF8F22 1527168152 +0200\npushee ssh://review.carbonrom.org:29418/CarbonROM/android_device_sony_z3\nnonce 1527168170-DA6B53E5564FB38751E85FFEAF338889A14185F1\n\n0000000000000000000000000000000000000000 e72596866decc86c8d0abb3e6587419bd555340d refs/for/cr-6.1/thermanager_z3\n-----BEGIN PGP SIGNATURE-----\n\niQIzBAABCAAdFiEEAeKysoG6T9uCVbCUU4O8v8DvjyIFAlsGvJgACgkQU4O8v8Dv\njyJh8RAAlR261IzlslgLEqL+m28ROdKJvEr/5FICETiAsh1Ya4dKmAMPueWFVZ7g\nYZqyOV3hUC0N8OQLKjKLQXqe1dfiOgdKPZdk2TuQ+XMYG7sgSvH0miUbK2D+Uj7u\nVAYOCkVCNXh8njMj4+7TgmlN3wcdMsBSo2BMQ5/+iN7dE9plB9RlOTkwagIF7EjW\neNtdlPImRLHm+jTGd1eao8fem+rTHaoMC2pkIBU3R3lUVNLuM1pvZ8MJKJ8/QVn3\nQw4IHOBPiG4TugpL5ut7qGTUu3YffLEfdlF97lLKLe2HgmpsSIT06IrOWduUAjWV\n8HMN7GFeKftTPK0N8A77v4bY5E1L9R1aNwSaghAWrVlaLMQu8utjTCDpSFOr1Z9P\n6JfBfL4DwgqGeTVESwh2LddOIBf7f7WxHFrTY/fzC9Lo7Int+ODG31BLqoJLmOh2\n9/Vs1/3LsE//ewqep0xlIQcmX4wUt8/w7HSPlGVjVmD7lsRX2eXOf7AQv3+AATsr\n0anwcecrhn2IDZ6r+9N38v2JDGxNGGCzmRmW6z6USFpwtSHetbCt/mcyv5VqUKbM\nMBTpZd+mKt/VgLFaTCFnNqTN2FF8oSo/fxF9/aXoKrKgDFHRu2Vr+aPv8b5LPtJi\n1biW36/eYma1XLRDhIODtolqYpSNODYuY5F09Jk+cnogHqaqL+U\u003d\n\u003dJ2KL\n-----END PGP SIGNATURE-----\n",
-  "comments": []
+  "comments": [
+    {
+      "key": {
+        "uuid": "f7b9ea47_e9e4b04f",
+        "filename": "configs/thermanager.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 222
+      },
+      "writtenOn": "2018-05-27T02:10:54Z",
+      "side": 1,
+      "message": "In former versions this was /sys/class/leds/lcd-backlight\nBut I guess both is OK. Changing values seem to have the same effect, no matter where you do it.",
+      "range": {
+        "startLine": 32,
+        "startChar": 58,
+        "endLine": 32,
+        "endChar": 72
+      },
+      "revId": "a41cb3e3cc89539442b559015cf03d77861ee7bd",
+      "serverId": "4c0b52a2-b090-4331-a190-b288d812d081",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e5e04f9_dc48952c",
+        "filename": "configs/thermanager.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 222
+      },
+      "writtenOn": "2018-05-27T02:10:54Z",
+      "side": 1,
+      "message": "maybe level 2 can be deleted - does not make sense imho\nIf we need a shutdown, this is triggered directly via shutdown.",
+      "range": {
+        "startLine": 81,
+        "startChar": 2,
+        "endLine": 81,
+        "endChar": 66
+      },
+      "revId": "a41cb3e3cc89539442b559015cf03d77861ee7bd",
+      "serverId": "4c0b52a2-b090-4331-a190-b288d812d081",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c73deb02_66f5a8d1",
+        "filename": "configs/thermanager.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 222
+      },
+      "writtenOn": "2018-05-27T02:10:54Z",
+      "side": 1,
+      "message": "Now these values don\u0027t make sense to me - I played with setting different values manually, and every value above 255 does not seem to have an effect.I guess it would be better to stick with the backlight values from the former versions.",
+      "range": {
+        "startLine": 103,
+        "startChar": 2,
+        "endLine": 112,
+        "endChar": 76
+      },
+      "revId": "a41cb3e3cc89539442b559015cf03d77861ee7bd",
+      "serverId": "4c0b52a2-b090-4331-a190-b288d812d081",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a4276044_b63c1244",
+        "filename": "configs/thermanager.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 222
+      },
+      "writtenOn": "2018-05-27T02:10:54Z",
+      "side": 1,
+      "message": "I think this value is too high. Li-ion batteries should not be charged above 50 deg C. For discharging we may go higher.\nProposal (to be tested): \nThreshold 60 deg: No more charging,  clear 50 deg\nThreshold 67 deg: Force shutdown!\n\nToDo: Test the behaviour of /sys/class/power_supply/battery/charging_enabled. If set to 0, does this mean that a connected power supply would still power the system, Or does this completely disconnect any power supply (and therefore cause a discharging of the battery)\n\nAlso: What\u0027s better (from a thermal point of view): To use power from a power supply or to discharge the battery?",
+      "range": {
+        "startLine": 261,
+        "startChar": 34,
+        "endLine": 261,
+        "endChar": 37
+      },
+      "revId": "a41cb3e3cc89539442b559015cf03d77861ee7bd",
+      "serverId": "4c0b52a2-b090-4331-a190-b288d812d081",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "db80a641_ca636719",
+        "filename": "configs/thermanager.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 222
+      },
+      "writtenOn": "2018-05-27T02:10:54Z",
+      "side": 1,
+      "message": "If I understand this value correctly it\u0027s 67,4 deg Celsius. Seems to be an irrelevant change compared to previous 67,0 deg.",
+      "range": {
+        "startLine": 261,
+        "startChar": 22,
+        "endLine": 261,
+        "endChar": 25
+      },
+      "revId": "a41cb3e3cc89539442b559015cf03d77861ee7bd",
+      "serverId": "4c0b52a2-b090-4331-a190-b288d812d081",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e045cd8_f8f289b4",
+        "filename": "configs/thermanager.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 222
+      },
+      "writtenOn": "2018-05-27T02:10:54Z",
+      "side": 1,
+      "message": "yes this makes more sense",
+      "range": {
+        "startLine": 262,
+        "startChar": 32,
+        "endLine": 262,
+        "endChar": 41
+      },
+      "revId": "a41cb3e3cc89539442b559015cf03d77861ee7bd",
+      "serverId": "4c0b52a2-b090-4331-a190-b288d812d081",
+      "unresolved": false
+    }
+  ]
 }
