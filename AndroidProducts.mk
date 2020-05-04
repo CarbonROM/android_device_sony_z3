@@ -15,9 +15,9 @@
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/lineage_z3.mk
+    $(LOCAL_DIR)/carbon_z3.mk
 
 COMMON_LUNCH_CHOICES := \
-    lineage_z3-user \
-    lineage_z3-userdebug \
-    lineage_z3-eng
+    carbon_z3-user \
+    carbon_z3-userdebug \
+    carbon_z3-eng
